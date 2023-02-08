@@ -48,6 +48,7 @@ svmroc <- function(modelSVM, test_data){
   plot(roc_curve, main ="Fascia Bassa", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
   
   frameB <- frame_SVM$fMedia_true
   frameBp <- frame_SVM$fMedia_pred_SVM
@@ -62,6 +63,7 @@ svmroc <- function(modelSVM, test_data){
   plot(roc_curve, main ="Fascia Media", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
   
   frameB <- frame_SVM$fAlta_true
   frameBp <- frame_SVM$fAlta_pred_SVM
@@ -75,6 +77,7 @@ svmroc <- function(modelSVM, test_data){
   plot(roc_curve, main ="Fascia Alta", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
   
   
   frameB <- frame_SVM$fPremium_true
@@ -89,6 +92,7 @@ svmroc <- function(modelSVM, test_data){
   plot(roc_curve, main ="Fascia Premium", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
   
 }
 
