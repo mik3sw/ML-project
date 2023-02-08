@@ -125,6 +125,7 @@ makeRangeColumn2 <- function(data){
 # ==============================================================================
 makeGpuColumn <- function(data){
   data$Gpu <- str_replace_all(data$Gpu, "GeForce GTX", "GTX ")
+  data$Gpu <- str_replace_all(data$Gpu, " Radeon", "")
   data$Gpu_Vendor <- sapply(strsplit(data$Gpu, " "), 
                             function(x) paste(x[1],x[2],sep=" "))
   return(data)

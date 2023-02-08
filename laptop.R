@@ -12,7 +12,7 @@
 
 # Importazione librerie 
 # ==============================================================================
-setwd("C:\\Users\\sosjj\\OneDrive\\Desktop\\ML-project\\ML-project")
+setwd("C:\\Users\\Mike\\Desktop\\ML-project")
 library(caret)
 library(e1071)
 library(class)
