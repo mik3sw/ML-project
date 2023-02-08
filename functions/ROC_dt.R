@@ -1,7 +1,6 @@
 library(pROC)
 
 dtroc <- function(modelTree, test_data){
-  predictions <- predict(modelTree, newdata = test_data, type = "class")
   predictions_prob <- predict(modelTree, test_data, type = "prob")
   
   frame <- test_data

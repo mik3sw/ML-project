@@ -12,7 +12,7 @@
 
 # Importazione librerie 
 # ==============================================================================
-setwd("C:\\Users\\Mike\\Desktop\\ML-final")
+setwd("C:\\Users\\sosjj\\OneDrive\\Desktop\\ML-project\\ML-project")
 library(caret)
 library(e1071)
 library(class)
@@ -52,6 +52,11 @@ ggplot(data, aes(x = range)) + geom_bar(aes(fill = range)) + facet_wrap(~ Screen
 ggplot(data, aes(x = range)) + geom_bar(aes(fill = range)) + facet_wrap(~ isTouchScreen)
 ggplot(data, aes(x = range)) + geom_bar(aes(fill = range)) + facet_wrap(~ isIPS)
 
+library(plotly)
+p <- plot_ly(train_data, x = ~Cpu_model, y = ~SSD, z = ~RamGB, color = ~range) %>%
+  add_markers()
+p
+
 # ==============================================================================
 
 
@@ -67,8 +72,14 @@ train_data <- data[ind==1, ]
 # Tutti i modelli che abbiamo testato con rispettive stats
 # ==============================================================================
 modelSVM <- testSVM(train_data, test_data)
+ggplotConfusionMatrix(confusionMatrix(predict(modelSVM, newdata = test_data, type = "class"), test_data$range))
+
 modelTree <- testDecisionalTree(train_data, test_data)
+ggplotConfusionMatrix(confusionMatrix(predict(modelTree, newdata = test_data, type = "class"), test_data$range))
+
 modelRF <- testRandomForest(train_data, test_data)
+ggplotConfusionMatrix(confusionMatrix(predict(modelRF, newdata = test_data, type = "class"), test_data$range))
+
 # ==============================================================================
 
 
@@ -77,4 +88,7 @@ modelRF <- testRandomForest(train_data, test_data)
 dtroc(modelTree, test_data)
 rfroc(modelRF, test_data)
 svmroc(modelSVM, test_data)
+
+# plot multiple curve roc: plot(add = true)
+
 # ==============================================================================

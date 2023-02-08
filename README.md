@@ -180,82 +180,84 @@ Notiamo inoltre che l'albero minimo di decisione consistente utilizza 8 dei 12 a
 **Risultati ottenuti testando il modello con il test set:**
  
 
-> ![conf_matrix](imgs/c_mat_dt.png)
+> ![conf_matrix](images/c_mat_dt.png)
 >
-> **Accuratezza:** 74%
+> **Accuratezza:** 75%
 >
 > **Precision:**
 >
-> - Fascia bassa: 89%
-> - Fascia media: 60%
+> - Fascia bassa: 81%
+> - Fascia media: 71%
 > - Fascia alta: 73%
 > - Fascia premium: 87%
 > 
->   **Precisione media:** 77% 
+>   **Precisione media:** 78% 
 > 
 > **Recall:**
 >
-> - Fascia bassa: 80%
-> - Fascia media: 71%
+> - Fascia bassa: 89%
+> - Fascia media: 70%
 > - Fascia alta: 79%
 > - Fascia premium: 49%
 >
->   **Recall media:** 70%
+>   **Recall media:** 72%
 >
 > **F-measure:**
 > 
-> - Fascia bassa: 84%
-> - Fascia media: 65%
+> - Fascia bassa: 85%
+> - Fascia media: 71%
 > - Fascia alta: 76%
 > - Fascia premium: 62% 
 >
->   **F-measure media:** 72%
+>   **F-measure media:** 74%
 
 ---
 ## **SVM:**
 
-Per le sue caratteristiche di efficienza nell'apprendimento, buone prestazioni e flessibilità come secondo modello è stato selezionato l'SVM 
+Per le sue caratteristiche di efficienza nell'apprendimento, buone prestazioni e flessibilità, come secondo modello è stato selezionato l'SVM 
 
-Il modello è stato addestrato utilizzando la funzione svm() della libreria e1071 utilizzando la stessa divisione del dataset.
+Il modello è stato addestrato utilizzando la funzione svm() della libreria e1071 utilizzando la stessa divisione del dataset introdotta precedentemente.
 
-Di seguito sono raffigurati i plot dei dati utilizzando gli attributi con correlazione più alta con la variabile target (SSD, RamGB, Cpu_model):
+Di seguito sono raffigurati dei plot di dati del set utilizzando gli attributi con correlazione più alta con la variabile target (SSD, RamGB, Cpu_model):
 
-![svm_plot](imgs/plot_per_svm.png) ![svm_plot1](imgs/plot_per_svm2.png)
+![svm_plot](imgs/plot_per_svm.png) ![svm_plot1](images/plot_svm.png) ![svm_plot2](images/plot_svm_1.png)
 
-La disposizione dei dati mostra un'andamento lineare rispetto al range dei prezzi (più alte sono le specifiche maggiore sarà la fascia di prezzo), abbiamo quindi utilizzato un kernel *linear* e provato diverse configurazioni del parametro *cost* per ottenere risultati migliori.
+Analizzando la disposizione dei dati abbiamo notato che le istanze delle singole classi non sono separabili tramite linea retta a meno di introdurre errori nella classificazione, laptop appartenenti ad una fascia di prezzo possono infatti avere componenti comuni ad altri laptop appartenenti ad altre fasce; abbiamo quindi assunto che le istanze del set non siano linearmente separabili e utilizzato quindi un kernel non lineare per l'addestramento del modello utilizzando diverse configurazioni del parametro *cost* per ottenere risultati migliori.
+
+Abbiamo quindi proceduto con l'addestramento del modello tramite kernel *radial* e settando il parametro *cost* prima ad 1 e poi a 100.
 
 **Risultati ottenuti testando il modello con il test set:**
 
-> ![conf_matrix2](imgs/c_mat_svm.png)
+> ![conf_matrix2](images/c_mat_svm.png)
 > 
-> Accuratezza (*cost* = 1): 78%
+> Accuratezza (*cost* = 1): 75%
 > 
-> Accuratezza (*cost* = 100): 79%
+> Accuratezza (*cost* = 100): 78%
 >  
 > **Precision:**
 >
-> - Fascia bassa: 93%
-> - Fascia media: 69%
-> - Fascia alta: 76%
+> - Fascia bassa: 89%
+> - Fascia media: 76%
+> - Fascia alta: 74%
 > - Fascia premium: 79%
 >
->   **Precisione media:** 79% 
+>   **Precisione media:** 80% 
 >
 > **Recall:**
 >
-> - Fascia bassa: 89%
-> - Fascia media: 78%
-> - Fascia alta: 79%
-> - Fascia premium: 54%
+> - Fascia bassa: 91%
+> - Fascia media: 81%
+> - Fascia alta: 78%
+> - Fascia premium: 46%
 >
->   **Recall media:** 75%
+>   **Recall media:** 74%
 >
 > **F-measure:**
 > 
-> - Fascia bassa: 91%
-> - Fascia media: 73%
-> - Fascia alta: 77%
-> - Fascia premium: 64% 
+> - Fascia bassa: 90%
+> - Fascia media: 79%
+> - Fascia alta: 76%
+> - Fascia premium: 58% 
 >
 >   **F-measure media:** 76%
 
@@ -266,43 +268,41 @@ Oltre la scelta di utilizzare un modello basato su albero decisionale abbiamo ri
 
 In particolare, ciascun albero di decisione della foresta viene addestrato con un sottoinsieme casuale dei dati di addestramento, e la classificazione avverrà combinando le previsioni di molti alberi di decisione per migliorare la precisione del modello; ciascun albero nella foresta fornisce infatti una previsione, verrà poi utilizzata la maggioranza delle previsioni per determinare quella effettiva.
 
-Il modello è stato quindi addestrato tramite la funzione *randomForest()* del pacchetto randomForest e testando diverse configurazioni del parametro *ntree*, che determina la quantità di alberi di decisione generata (la grandezza della foresta).
+Il modello è stato quindi addestrato tramite la funzione *randomForest()* del pacchetto randomForest settando il parametro *ntree*, che determina la quantità di alberi di decisione generata (la grandezza della foresta), a 100.
 
 **Risultati ottenuti testando il modello con il test set:**
 
 
-> ![conf_matrix2](imgs/c_mat_RF.png)
+> ![conf_matrix2](images/c_mat_rf1.png)
 > 
-> Accuratezza (*ntree* = 10): 75%
->
 > Accuratezza (*ntree* = 100): 78%
 >  
 > **Precision:**
 >
-> - Fascia bassa: 91%
-> - Fascia media: 67%
+> - Fascia bassa: 87%
+> - Fascia media: 76%
 > - Fascia alta: 75%
-> - Fascia premium: 94%
+> - Fascia premium: 86%
 >
->   **Precisione media:** 82%
+>   **Precisione media:** 81%
 > 
 > **Recall:**
 >  
-> - Fascia bassa: 87%
-> - Fascia media: 78%
+> - Fascia bassa: 88%
+> - Fascia media: 80%
 > - Fascia alta: 81%
-> - Fascia premium: 41%
+> - Fascia premium: 46%
 >
->   **Recall media:** 72%
+>   **Recall media:** 74%
 >
 > **F-measure:**
 > 
-> - Fascia bassa: 89%
-> - Fascia media: 72%
+> - Fascia bassa: 87%
+> - Fascia media: 78%
 > - Fascia alta: 78%
-> - Fascia premium: 58%
+> - Fascia premium: 60%
 >
->   **F-measure media:** 74%
+>   **F-measure media:** 76%
 
 
 ## **Esperimenti:**
@@ -314,31 +314,20 @@ Calcolo di ROC e AUC dei modelli di classificazione:
 
 **Curva ROC per classe**
 
-- Fascia bassa:
 
-![roc_tree_1](imgs/roc_tree_1.png)
+![roc_tree_1](images/roc_dt_1.png)
+![roc_tree_2](images/roc_dt_2.png)
+![roc_tree_3](images/roc_dt_3.png)
+![roc_tree_4](images/roc_dt_4.png)
 
-AUC: 0.94
-
-- Fascia media:
-
-![roc_tree_2](imgs/roc_tree_2.png)
-
-AUC: 0.81
-
-- Fascia alta:
-
-![roc_tree_3](imgs/roc_tree_3.png)
-
-AUC: 0.85
-
-- Fascia premium:
-
-![roc_tree_4](imgs/roc_tree_4.png)
-
-AUC: 0.92
-
+> AUC: 
+> - Fascia bassa: 0.96 
+> - Fascia media: 0.85 
+> - Fascia alta: 0.85 
+> - Fascia premim: 0.92
+> 
 > AUC media: 0.88 
+> 
 
 
 ---
@@ -347,31 +336,18 @@ AUC: 0.92
 
 **Curva ROC per classe**
 
-- Fascia bassa
+![roc_svm_1](images/roc_svm_1.png)
+![roc_svm_2](images/roc_svm_2.png)
+![roc_svm_3](images/roc_svm_3.png)
+![roc_svm_4](images/roc_svm_4.png)
 
-![roc_svm_1](imgs/roc_svm_1.png)
-
-AUC: 0.95
-
-- Fascia media:
-
-![roc_svm_2](imgs/roc_svm_2.png)
-
-AUC: 0.54
-
-- Fascia alta:
-
-![roc_svm_3](imgs/roc_svm_3.png)
-
-AUC: 0.77
-
-- Fascia premium:
-
-![roc_svm_4](imgs/roc_svm_4.png)
-
-AUC: 0.83
-
-> AUC media: 0.77
+> AUC:
+> - Fascia bassa: 0.95
+> - Fascia media: 0.93
+> - Fascia alta: 0.79
+> - Fascia premium: 0.94
+>
+> AUC media: 0.90
 
 
 ---
@@ -380,66 +356,94 @@ AUC: 0.83
 
 Curva ROC per classe:
 
-- Fascia bassa:
+![roc_forest_1](images/roc_rf_1.png)
+![roc_forest_2](images/roc_rf_2.png)
+![roc_forest_3](images/roc_rf_3.png)
+![roc_forest_4](images/roc_rf_4.png)
 
-![roc_forest_1](imgs/roc_rf_1.png)
-
-AUC: 0.98
-
-- Fascia media:
-
-![roc_forest_2](imgs/roc_rf_2.png)
-
-AUC: 0.88
-
-- Fascia alta:
-
-![roc_forest_3](imgs/roc_rf_3.png)
-
-AUC: 0.91
-
-- Fascia premium:
-
-![roc_forest_4](imgs/roc_rf_4.png)
-
-AUC: 0.97
-
-**AUC media: 0.94** 
+> AUC: 
+> - Fascia bassa: 0.99
+> - Fascia media: 0.90
+> - Fascia alta: 0.92
+> - Fascia premium: 0.96
+>
+> AUC media: 0.94
 
 
 
 ## **Analisi dei risultati ottenuti e conclusioni:**
 
-- Decision tree:
+---
 
-Per quanto riguarda il modello di classificazione con albero decisione, i risultati dei test effettuati sul test set mostrano una discreta accuratezza nella classificazione, in particolare si dimostra efficace nel riconoscere le istanze positive (precisione media: 77%), producendo tuttavia un quantitativo di FN che provoca un abbassamento di percentuale per la Recall e di conseguenza per l'F-measure (Recall: 70%, F-measure: 72%).
+- **Decision tree:**
 
-Più nello specifico, il modello trova più difficoltà a riconoscere le istanze appartenenti alla Fascia premium, probabilmente dovuto al fatto che nel set sono presenti meno esempi appartenenti a tale classe.
+Per quanto riguarda il modello di classificazione tramite albero di decisione, i risultati dei test effettuati sul test set mostrano una discreta accuratezza nella classificazione (accuracy: **75%**), in particolare si dimostra efficace nel riconoscere le istanze positive (precisione media: **78%**), producendo tuttavia un quantitativo di falsi negativi che provoca un leggero abbassamento di percentuale per la Recall e di conseguenza per l'F-measure (Recall media: **72%**, F-measure media: **74%**).
 
+Più nello specifico, il modello trova più difficoltà a riconoscere le istanze appartenenti alla Fascia premium (Recall per Fascia premium: **49%**), producendo infatti un alto numero di falsi negativi.
+Questo è probabilmente dovuto al fatto che nel set sono presenti meno esempi appartenenti a tale classe, rendendo più difficoltosa la generalizzazione per tale classe.
 
-La validazione eseguita tramite tecnica 10-fold, mostra un abbassamento delle prestazioni di circa il 10%, questo potrebbe significare che il modello potrebbe essere soggetto a overfitting, adattandosi troppo alle caratteristiche del training set e non generalizzando bene con nuove osservazioni incontrate.
-
-- Random forest:
-
-La scelta di addestrare un modello Random forest deriva proprio da questo calo di prestazioni.
-In questo caso, oltre ad un generale aumento delle prestazioni con numero di alberi > 50 abbiamo aumento di circa 10% dell'accuratezza tramite 10-fold.
-
-Il modello generalizza quindi bene alle nuove osservazioni e ha imparato bene le relazioni tra le caratteristiche e le etichette, riuscendo a generalizzare queste conoscenze anche a nuovi dati, tuttavia la precisione più bassa su test set potrebbe indicare che il set di addestramento utilizzato contiene un basso numero di esempi.
-
-Anche in questo caso  il modello produce un maggior quantitativo di falsi negativi riguardanti la Fascia premium.
+Per quanto riguarda le altre fasce di prezzo il modello ottiene risultati discreti risultando però più performante nel riconoscimento della Fascia bassa (Precision Fascia bassa: **81%**, Recall Fascia bassa: **89%**), risulta infatti preciso nel riconoscere le istanze positive producendo al contempo un basso numero di falsi negativi.
 
 
+- **SVM:**
 
-- SVM:
+Per quanto riguarda il modello SVM generato abbiamo ottenuto in generale delle buone prestazioni di classificazione.
+Esso si rivela infatti molto accurato nelle classificazioni (accuracy media: **78%**), risultando in media molto preciso nella classificazione di istanze positive ma mantenendo comunque un basso numero di falsi negativi (Precision media: **80%**, Recall media: **74%**, F-measure: **76%**).
 
-Per quanto riguarda il modello SVM generato abbiamo in generale delle buone prestazioni nella classificazione sia tramite test su test set, che tramite 10-fold; abbiamo infatti valori di accuratezza che discordano di poche percentuali (79% su test set, 76% tramite 10-fold), confermando la buona generalizzazione del modello.
+Nello specifico, anche in questo caso il modello trova più difficoltà a classificare istanze appartenenti alla classe *Fascia premium*, producendo alti valori di falsi negativi (Precision Fascia premium: **79%**, Recall Fascia premium: **46%**), mentre per quanto riguarda le altre classi otteniamo alta precisione nel riconoscere istanze positive (Precision Fascia bassa: **89%**, Precision Fascia media: **76%**, Precision Fascia alta: **74%**) mantenendo comunque una bassa classificazione di falsi negativi (Recall Fascia bassa: **91**, Recall Fascia media: **81%**, Recall Fascia alta: **78%**), permettendo di ottenere quindi alti valori di misurazione medi di performance.
 
-Come negli altri due casi, il modello classifica molti falsi negativi sulla classe Fascia premium, confermando la scarsità di esempi presenti nel dataset
 
+- **Random Forest:**
+
+Il modello Random Forest (*ntree*=100) ottenuto presenta risultati molto simili a quelli ottenuti con il modello SVM, in generale otteniamo infatti misure di performance medie di poco maggiori rispetto ad esso (Accuracy media: **78%**, Precision media: **81%**, Recall media: **74%**, F-measure media: **76%**).
+
+Per quanto riguarda le singole classi target, il modello risulta particolarmente preciso nell'individuazione delle istanze appartenenti alla Fascia bassa, producendo un numero minimo di falsi negativi (Precision Fascia bassa: **87%**, Recall Fascia bassa: **88%**), presenta inoltre risultati di poco differenti dal modello SVM riguardo le fasce media e alta (Precision Fascia media: **76%**, Precision Fascia alta: **75%**, Recall Fascia media: **80%**, Recall Fascia alta: **81%**).
+
+La maggiore differenza si ottiene nell'individuazione della Fascia premium, abbiamo infatti una maggiore precisione nel riconoscere istanze positive (Precision Fascia premium: **86%**, Recall Fascia premium: **46%**).
+
+---
 
   **Analisi delle curve ROC e AUC:**
 
-Le curve ROC e AUC prodotte mostrano come il modello SVM risulti essere il modello migliore tra quelli sviluppati, presentando un tasso di TPR decisamente maggiore rispetto ai FPR anche rispetto agli altri modelli.
+L'analisi delle curve ROC prodotte possono aiutare meglio a comparare l'efficacia di classificazione per ciascun modello mediante rappresentazione grafica.
 
-Inoltre le curve ROC di decision tree ed albero di decisione confermano ulteriormente come i modelli facciano fatica a classificare istanze della classe Fascia premium.
+Analisi curve ROC per classe target:
 
+>*Modello Decision Tree: blu    
+Modello SVM: verde    
+Modello Random Forest: rosso* 
+
+![roc_comparison_1](images/roc_comp_1.png)
+![roc_comparison_2](images/roc_comp_2.png)
+![roc_comparison_3](images/roc_comp_3.png)
+![roc_comparison_4](images/roc_comp_4.png)
+
+> AUC per classe target:
+>
+> - Fascia bassa
+>   - AUC decision tree: 0.96
+>   - AUC SVM: 0.95
+>   - AUC random forest: 0.99
+> - Fascia media:
+>   - AUC decision tree: 0.85
+>   - AUC SVM: 0.93
+>   - AUC random forest: 0.9
+> - Fascia alta:
+>   - AUC decision tree: 0.85
+>   - AUC SVM: 0.79
+>   - AUC random forest: 0.92
+> - Fascia premium:
+>   - AUC decision tree: 0.92
+>   - AUC SVM: 0.94
+>   - AUC random forest: 0.96
+>
+> AUC media:
+> - Decision tree: 0.88
+> - SVM: 0.9
+> - Random Forest: 0.94
+
+Analizzando i grafici delle *ROC curve* e i conseguenti valori di *AUC* (area under the curve) possiamo infatti notare con che efficacia i diversi modelli sono in grado di distinguere le istanze di ciascuna classe dalle altre.
+
+Possiamo quindi notare che il modello Random Forest risulta più performante nel riconoscere tutte le classi target ad eccezione della classe *Fascia media*, meglio riconosciuta dal modello SVM.
+
+In conclusione possiamo quindi affermare che, in generale, il modello di classificazione Random Forest risulta essere il migliore rispetto agli altri due classificatori presentati.

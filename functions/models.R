@@ -32,22 +32,28 @@ getStats <- function(predictions, reference, modeltype){
   cat("================================\n")
 }
 
+ggplotConfusionMatrix <- function(m){
+  mytitle <- paste("Confusion Matrix")
+  p <-
+    ggplot(data = as.data.frame(m$table) ,
+           aes(x = Reference, y = Prediction)) +
+    geom_tile(aes(fill = log(Freq)), colour = "white") +
+    scale_fill_gradient(low = "white", high = "steelblue") +
+    geom_text(aes(x = Reference, y = Prediction, label = Freq)) +
+    theme(legend.position = "none") +
+    ggtitle(mytitle)
+  return(p)
+}
+
 # MODELLO SVM
 testSVM <- function(train_data, test_data){
   formula <- range ~ .
-  model <- svm(formula, data=train_data, kernel="linear", cost=100, probability = TRUE)
+  model <- svm(formula, data=train_data, kernel="radial", cost=100, probability = TRUE)
   predictions <- predict(model, test_data)
   getStats(predictions, test_data$range, "SVM")
   return(model)
 }
 
-# MODELLO NAIVE BAYES
-testNaiveBayes <- function(train_data, test_data){
-  model <- naiveBayes(train_data, train_data$range)
-  predictions <- predict(model, test_data)
-  getStats(predictions, test_data$range, "NAIVE BAYES")
-  return(model)
-}
 
 # MODELLO ALBERO DECISIONALE
 testDecisionalTree <- function(train_data, test_data){
@@ -64,7 +70,7 @@ testDecisionalTree <- function(train_data, test_data){
 testRandomForest <- function(train_data, test_data){
   library(randomForest)
   formula <- range ~ .
-  model <- randomForest(formula, data=train_data, na.action=na.fail, ntree=1000)
+  model <- randomForest(formula, data=train_data, na.action=na.fail, ntree=100, mtry = 3)
   predictions <- predict(model, test_data)
   getStats(predictions, test_data$range, "RANDOM FOREST")
   return(model)

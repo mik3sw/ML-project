@@ -43,6 +43,7 @@ rfroc <- function(modelRF, test_data){
   plot(roc_curve, main ="Fascia Bassa", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
   
   frameB <- frame_RF$fMedia_true
   frameBp <- frame_RF$fMedia_pred_RF
@@ -56,6 +57,7 @@ rfroc <- function(modelRF, test_data){
   plot(roc_curve, main ="Fascia Media", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
   
   frameB <- frame_RF$fAlta_true
   frameBp <- frame_RF$fAlta_pred_RF
@@ -70,7 +72,7 @@ rfroc <- function(modelRF, test_data){
   plot(roc_curve, main ="Fascia Alta", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
-  
+  #roc_curve
   
   frameB <- frame_RF$fPremium_true
   frameBp <- frame_RF$fPremium_pred_RF
@@ -84,5 +86,6 @@ rfroc <- function(modelRF, test_data){
   plot(roc_curve, main ="Fascia Premium", legacy.axes = TRUE,xlab = "False Positive Rate", 
        ylab = "True Positive Rate", 
        col = "#377eb8")
+  #roc_curve
 }
 
