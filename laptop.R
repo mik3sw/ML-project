@@ -82,7 +82,6 @@ ggplotConfusionMatrix(confusionMatrix(predict(modelRF, newdata = test_data, type
 
 # ==============================================================================
 
-
 # ROC e AUC
 # ==============================================================================
 dtroc(modelTree, test_data)
