@@ -20,7 +20,8 @@ Il dominio di interesse selezionato per il nostro progetto riguarda il prezzo di
 
 ## **Laptop Price**
 
-Questo dataset raccoglie informazioni tecniche su diversi modelli e marche di laptop
+Questo dataset raccoglie informazioni tecniche su diversi modelli e marche di laptop.
+Esso consiste in 1303 elementi caratterizzati dai seguenti attributi:
 
 1. **Company** - String - Laptop Manufacturer
 2. **Product** - String - Brand and Model
@@ -49,13 +50,15 @@ Questo dataset raccoglie informazioni tecniche su diversi modelli e marche di la
 
 ## **Assunzioni ed analisi esplorativa**
 
-Abbiamo deciso di non ragionare sul prezzo numerico effettivo, quanto piu' sulla fascia di prezzo alla quale appartiene ogni laptop. A tal proposito abbiamo creato la colonna "ranges" costituita da quattro classi:
+Utilizzando l'attributo *Price_euros* deciso di generare 4 classi target divise per fasce di prezzo alla quale appartiene ogni laptop. A tal proposito abbiamo creato la colonna "ranges" costituita da quattro classi:
 
 - **Fascia bassa**: < 500€
 - **Fascia media**: 500-1000€
 - **Fascia alta**: 1000-2000€
 - **Fascia premium**: > 2000€
 
+
+> Distribuzione delle istanze sulla base dell'attributo *ranges* nel dataset
 
 ![](images/DistribuzioneFasciaPrezzo.png)
 
@@ -80,7 +83,7 @@ Queste colonne contengono valori char che per semplicità sono stati trasformati
 
 NB: I dati relativi al peso dei pc interessano una fetta molto piccola del database, infatti spesso un pc molto pesante (4kg) è un pc da gaming o una workstation (Fascia alta-premium).
 
-La ram invece risulta essere un chiaro fattore che fa aumentare il prezzo in base alla quantità presente.
+La ram invece risulta essere un chiaro fattore che fa aumentare il prezzo in base alla quantità presente:
 
 ![](images/DistribuzionePerRam.png)
 
@@ -97,6 +100,8 @@ Seguendo questa strada però non abbiamo tenuto conto che sia Intel, AMD che NVI
 
 NB: Intel HD è la famiglia di schede grafiche integrata dai processori Intel, usata sia da pc low cost che da macbook e workstation.
 
+> Distribuzione delle istanze nelle fasce di prezzo sulla base dell'attributo *RamGB*
+ 
 ![](images/DistribuzionePerGpu.png)
 
 
@@ -118,20 +123,25 @@ Es:
 
 Abbiamo innanzitutto cercato di estrapolare la tipologia di display (HD, FHD, QHD, 4K ecc) basandoci sia sulla risoluzione fornita sia sulla presenza o meno di una stringa che ne indicasse la tipologia, indicando anche, in una diversa colonna, se lo schermo fosse o meno TouchScreen.
 
+> Distribuzione delle istanze nelle fasce di prezzo sulla base dell'attributo *ScreenResolution*
+
+
 ![](images/DistribuzionePerScreen.png)
-**Plot distribuzione touch screen**
+
+> Distribuzione delle istanze nelle fasce di prezzo sulla base dell'attributo *IsTouchScreen*
+
 ![](images/DistribuzionePerTouch.png)
 
 
 
-Abbiamo creato anche una colonna che raccogliesse l'informazione del tipo di pannello (IPS, True o False) dato che la presenza di un pannello IPS solitamente indica una maggiore qualità e costo complessivi.
+Abbiamo creato anche una colonna che raccogliesse l'informazione del tipo di pannello (IPS, True o False) dato che la presenza di un pannello IPS solitamente indica una maggiore qualità e costo complessivi:
 
 ![](images/DistribuzionePerIPS.png)
 
 
 ## **Sistema Operativo**
 
-Anche per questa colonna abbiamo provveduto ad una semplificazione delle classi presenti dividendo i sistemi operativi in "Windows", "Mac" e "Linux/Other"
+Anche per questa colonna abbiamo provveduto ad una semplificazione delle classi presenti dividendo i sistemi operativi in "Windows", "Mac" e "Linux/Other" : 
 
 ![](images/DistribuzionePerOS.png)
 
@@ -173,7 +183,7 @@ L'albero di decisione risultante è il seguente:
 
 ![tree plot](imgs/plot_decision_tree.png)
 
-Dall'immagine possiamo notare tra gli attributi quelli con maggior information gain che permettono lo split ottimale del set.
+Dall'immagine possiamo notare tra gli attributi quelli che permettono lo split ottimale del set.
 
 Notiamo inoltre che l'albero minimo di decisione consistente utilizza 8 dei 12 attributi utilizzati per l'addestramento.
 
