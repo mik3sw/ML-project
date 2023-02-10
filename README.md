@@ -182,30 +182,30 @@ Notiamo inoltre che l'albero minimo di decisione consistente utilizza 8 dei 12 a
 
 > ![conf_matrix](images/c_mat_dt.png)
 >
-> **Accuratezza:** 75%
+> **Accuratezza:** 76%
 >
 > **Precision:**
 >
-> - Fascia bassa: 81%
-> - Fascia media: 71%
+> - Fascia bassa: 84%
+> - Fascia media: 72%
 > - Fascia alta: 73%
 > - Fascia premium: 87%
 > 
->   **Precisione media:** 78% 
+>   **Precisione media:** 79% 
 > 
 > **Recall:**
 >
-> - Fascia bassa: 89%
-> - Fascia media: 70%
-> - Fascia alta: 79%
+> - Fascia bassa: 88%
+> - Fascia media: 73%
+> - Fascia alta: 80%
 > - Fascia premium: 49%
 >
->   **Recall media:** 72%
+>   **Recall media:** 73%
 >
 > **F-measure:**
 > 
-> - Fascia bassa: 85%
-> - Fascia media: 71%
+> - Fascia bassa: 86%
+> - Fascia media: 72%
 > - Fascia alta: 76%
 > - Fascia premium: 62% 
 >
@@ -228,11 +228,45 @@ Abbiamo quindi proceduto con l'addestramento del modello tramite kernel *radial*
 
 **Risultati ottenuti testando il modello con il test set:**
 
+> **cost = 1**
+>
+> ![conf_matrix1](images/c_mat_SVM_cost1.png)
+>
+> Accuratezza: 74%
+>
+> **Precision:**
+>
+> - Fascia bassa: 85%
+> - Fascia media: 72%
+> - Fascia alta: 68%
+> - Fascia premium: 100%
+>
+>   **Precisione media:** 81% 
+>
+> **Recall:**
+>
+> - Fascia bassa: 84%
+> - Fascia media: 76%
+> - Fascia alta: 82%
+> - Fascia premium: 22%
+>
+>   **Recall media:** 66%
+>
+> **F-measure:**
+> 
+> - Fascia bassa: 84%
+> - Fascia media: 74%
+> - Fascia alta: 75%
+> - Fascia premium: 36% 
+>
+>   **F-measure media:** 67%
+> ---
+> **cost = 100**
+> 
 > ![conf_matrix2](images/c_mat_svm.png)
 > 
-> Accuratezza (*cost* = 1): 75%
 > 
-> Accuratezza (*cost* = 100): 78%
+> Accuratezza: 78%
 >  
 > **Precision:**
 >
@@ -273,9 +307,43 @@ Il modello è stato quindi addestrato tramite la funzione *randomForest()* del p
 **Risultati ottenuti testando il modello con il test set:**
 
 
+> **ntree = 10**
+> ![conf_matrix1](images/c_mat_RF_ntree10.png)
+>
+> Accuratezza: 75%
+>
+> **Precision:**
+>
+> - Fascia bassa: 85%
+> - Fascia media: 71%
+> - Fascia alta: 74%
+> - Fascia premium: 75%
+>
+>   **Precisione media:** 76%
+> 
+> **Recall:**
+>  
+> - Fascia bassa: 83%
+> - Fascia media: 77%
+> - Fascia alta: 76%
+> - Fascia premium: 51%
+>
+>   **Recall media:** 72%
+>
+> **F-measure:**
+> 
+> - Fascia bassa: 84%
+> - Fascia media: 74%
+> - Fascia alta: 75%
+> - Fascia premium: 61%
+>
+>   **F-measure media:** 74% 
+> 
+> ---
+> **ntree = 100**
 > ![conf_matrix2](images/c_mat_rf1.png)
 > 
-> Accuratezza (*ntree* = 100): 78%
+> Accuratezza: 78%
 >  
 > **Precision:**
 >
@@ -377,12 +445,12 @@ Curva ROC per classe:
 
 - **Decision tree:**
 
-Per quanto riguarda il modello di classificazione tramite albero di decisione, i risultati dei test effettuati sul test set mostrano una discreta accuratezza nella classificazione (accuracy: **75%**), in particolare si dimostra efficace nel riconoscere le istanze positive (precisione media: **78%**), producendo tuttavia un quantitativo di falsi negativi che provoca un leggero abbassamento di percentuale per la Recall e di conseguenza per l'F-measure (Recall media: **72%**, F-measure media: **74%**).
+Per quanto riguarda il modello di classificazione tramite albero di decisione, i risultati dei test effettuati sul test set mostrano una discreta accuratezza nella classificazione (accuracy: **76%**), in particolare si dimostra efficace nel riconoscere le istanze positive (precisione media: **79%**), producendo tuttavia un quantitativo di falsi negativi che provoca un leggero abbassamento di percentuale per la Recall e di conseguenza per l'F-measure (Recall media: **73%**, F-measure media: **74%**).
 
 Più nello specifico, il modello trova più difficoltà a riconoscere le istanze appartenenti alla Fascia premium (Recall per Fascia premium: **49%**), producendo infatti un alto numero di falsi negativi.
 Questo è probabilmente dovuto al fatto che nel set sono presenti meno esempi appartenenti a tale classe, rendendo più difficoltosa la generalizzazione per tale classe.
 
-Per quanto riguarda le altre fasce di prezzo il modello ottiene risultati discreti risultando però più performante nel riconoscimento della Fascia bassa (Precision Fascia bassa: **81%**, Recall Fascia bassa: **89%**), risulta infatti preciso nel riconoscere le istanze positive producendo al contempo un basso numero di falsi negativi.
+Per quanto riguarda le altre fasce di prezzo il modello ottiene risultati discreti risultando però più performante nel riconoscimento della Fascia bassa (Precision Fascia bassa: **84%**, Recall Fascia bassa: **88%**), risulta infatti preciso nel riconoscere le istanze positive producendo al contempo un basso numero di falsi negativi.
 
 
 - **SVM:**
