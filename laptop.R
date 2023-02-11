@@ -12,7 +12,7 @@
 
 # Importazione librerie 
 # ==============================================================================
-setwd("C:\\Users\\Mike\\Desktop\\ML-project")
+setwd("set wd")
 library(caret)
 library(e1071)
 library(class)
@@ -52,8 +52,9 @@ ggplot(data, aes(x = range)) + geom_bar(aes(fill = range)) + facet_wrap(~ Screen
 ggplot(data, aes(x = range)) + geom_bar(aes(fill = range)) + facet_wrap(~ isTouchScreen)
 ggplot(data, aes(x = range)) + geom_bar(aes(fill = range)) + facet_wrap(~ isIPS)
 
+# plot dati (coordinate: cpu_model, SSD, RamGB)
 library(plotly)
-p <- plot_ly(train_data, x = ~Cpu_model, y = ~SSD, z = ~RamGB, color = ~range) %>%
+p <- plot_ly(data, x = ~Cpu_model, y = ~SSD, z = ~RamGB, color = ~range) %>%
   add_markers()
 p
 
