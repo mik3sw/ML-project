@@ -5,6 +5,39 @@ Marcucci Michele  [851905]
 Mazzitelli Davide [851657]
 ```
 
+# **Indice**
+- [Introduzione](#introduzione)
+  - [Obiettivo del progetto](#obiettivo-del-progetto)
+  - [Dominio di riferimento](#dominio-di-riferimento)
+- [Dataset](#dataset)
+  - [Head dataset](#head-dataset)
+- [Preprocessing](#preprocessing)
+  - [Assunzioni ed analisi esplorativa](#assunzioni-ed-analisi-esplorativa)
+  - [Memory](#memory-memoria-dello-storage-interno)
+  - [Peso e ram](#weight-peso-del-laptop-e-ram)
+  - [GPU](#gpu-informazioni-sulla-scheda-grafica)
+  - [CPU](#cpu)
+  - [Schermo](#schermo)
+  - [Sistema operativo](#sistema-operativo)
+  - [Risultato finale](#eliminazione-colonne-inutili-e-risultato-finale)
+- [Modelli](#modelli-di-machine-learning-scelti)
+  - [Albero di decisione](#albero-di-decisione)
+  - [SVM](#svm)
+  - [Random Forest](#random-forest)
+- [Esperimenti]()
+  - [Albero di decisione](#albero-di-decisione-1)
+  - [SVM](#svm-1)
+  - [Randome Forest](#random-forest-1)
+- [Analisi finale e conclusione](#analisi-dei-risultati-ottenuti-e-conclusioni)
+  - [Albero di decisione](#albero-di-decisione-2)
+  - [SVM](#svm-2)
+  - [Randome Forest](#random-forest-2)
+  - [Analisi delle curve ROC e AUC](#analisi-delle-curve-roc-e-auc)
+
+<div style="page-break-after: always"></div>
+
+# **Introduzione**
+
 ## **Obiettivo del progetto:**
 
 L'obiettivo del progetto consiste nell'identificare un dominio di interesse per il quale realizzare almeno 2 modelli di classificazione supervisionata e/o non supervisionata, individuando il relativo dataset.
@@ -17,8 +50,6 @@ Il dominio di interesse selezionato per il nostro progetto riguarda il prezzo di
 
 
 # **Dataset**
-
-## **Laptop Price**
 
 > link dataset: https://www.kaggle.com/datasets/muhammetvarl/laptop-price
 
@@ -38,7 +69,7 @@ Esso consiste in 1303 elementi caratterizzati dai seguenti attributi:
 11. **Weight** - String - Laptop Weight
 12. **Price_euros** - Numeric - Price (Euro)
 
-### **Head**
+## **Head dataset**
 
 |laptop_ID|Company|Product|TypeName|Inches|ScreenResolution|Cpu|Ram|Memory|Gpu|OpSys|Weight|Price_euros|
 |---------|-------|-------|--------|------|----------------|---|---|------|---|-----|------|-----------|
@@ -47,8 +78,9 @@ Esso consiste in 1303 elementi caratterizzati dai seguenti attributi:
 
 
 
+<div style="page-break-after: always"></div>
 
-# **Preprocessing dei dati**
+# **Preprocessing**
 
 ## **Assunzioni ed analisi esplorativa**
 
@@ -168,6 +200,7 @@ Il nuovo dataset ottenuto e composto dalle seguenti colonne:
 ---
 
 
+<div style="page-break-after: always"></div>
 
 # **Modelli di Machine Learning scelti:**
 Una volta elaborato il dataset si è proceduto con la scelta dei modelli di classificazione da implementare.
@@ -183,7 +216,7 @@ Il modello è stato addestrato utilizzando la funzione rpart, ponendo come targe
 
 L'albero di decisione risultante è il seguente:
 
-![tree plot](imgs/plot_decision_tree.png)
+![tree plot](images/plot_decision_tree.png)
 
 Dall'immagine possiamo notare tra gli attributi quelli che permettono lo split ottimale del set.
 
@@ -232,7 +265,7 @@ Il modello è stato addestrato utilizzando la funzione svm() della libreria e107
 
 Di seguito sono raffigurati dei plot di dati del set utilizzando gli attributi con correlazione più alta con la variabile target (SSD, RamGB, Cpu_model):
 
-![svm_plot](imgs/plot_per_svm.png) ![svm_plot1](images/plot_svm.png) ![svm_plot2](images/plot_svm_1.png)
+![svm_plot](images/plot_per_svm.png) ![svm_plot1](images/plot_svm.png) ![svm_plot2](images/plot_svm_1.png)
 
 Analizzando la disposizione dei dati abbiamo notato che le istanze delle singole classi non sono separabili tramite linea retta a meno di introdurre errori nella classificazione, laptop appartenenti ad una fascia di prezzo possono infatti avere componenti comuni ad altri laptop appartenenti ad altre fasce; abbiamo quindi assunto che le istanze del set non siano linearmente separabili e utilizzato quindi un kernel non lineare per l'addestramento del modello utilizzando diverse configurazioni del parametro *cost* per ottenere risultati migliori.
 
@@ -385,12 +418,12 @@ Il modello è stato quindi addestrato tramite la funzione *randomForest()* del p
 >   **F-measure media:** 76%
 
 
-## **Esperimenti:**
+# **Esperimenti:**
 
 Calcolo di ROC e AUC dei modelli di classificazione:
 
 ---
-## Albero di decisione:
+## **Albero di decisione**:
 
 **Curva ROC per classe**
 
@@ -412,7 +445,7 @@ Calcolo di ROC e AUC dei modelli di classificazione:
 
 ---
 
-## SVM
+## **SVM**
 
 **Curva ROC per classe**
 
@@ -432,7 +465,7 @@ Calcolo di ROC e AUC dei modelli di classificazione:
 
 ---
 
-## Random forest:
+## **Random forest**:
 
 Curva ROC per classe:
 
@@ -450,12 +483,13 @@ Curva ROC per classe:
 > AUC media: 0.94
 
 
+<div style="page-break-after: always"></div>
 
-## **Analisi dei risultati ottenuti e conclusioni:**
+# **Analisi dei risultati ottenuti e conclusioni:**
 
----
 
-- **Decision tree:**
+
+## **Albero di decisione:**
 
 Per quanto riguarda il modello di classificazione tramite albero di decisione, i risultati dei test effettuati sul test set mostrano una discreta accuratezza nella classificazione (accuracy: **76%**), in particolare si dimostra efficace nel riconoscere le istanze positive (precisione media: **79%**), producendo tuttavia un quantitativo di falsi negativi che provoca un leggero abbassamento di percentuale per la Recall e di conseguenza per l'F-measure (Recall media: **73%**, F-measure media: **74%**).
 
@@ -465,7 +499,7 @@ Questo è probabilmente dovuto al fatto che nel set sono presenti meno esempi ap
 Per quanto riguarda le altre fasce di prezzo il modello ottiene risultati discreti risultando però più performante nel riconoscimento della Fascia bassa (Precision Fascia bassa: **84%**, Recall Fascia bassa: **88%**), risulta infatti preciso nel riconoscere le istanze positive producendo al contempo un basso numero di falsi negativi.
 
 
-- **SVM:**
+## **SVM:**
 
 Per quanto riguarda il modello SVM generato abbiamo ottenuto in generale delle buone prestazioni di classificazione.
 Esso si rivela infatti molto accurato nelle classificazioni (accuracy media: **78%**), risultando in media molto preciso nella classificazione di istanze positive ma mantenendo comunque un basso numero di falsi negativi (Precision media: **80%**, Recall media: **74%**, F-measure: **76%**).
@@ -473,7 +507,7 @@ Esso si rivela infatti molto accurato nelle classificazioni (accuracy media: **7
 Nello specifico, anche in questo caso il modello trova più difficoltà a classificare istanze appartenenti alla classe *Fascia premium*, producendo alti valori di falsi negativi (Precision Fascia premium: **79%**, Recall Fascia premium: **46%**), mentre per quanto riguarda le altre classi otteniamo alta precisione nel riconoscere istanze positive (Precision Fascia bassa: **89%**, Precision Fascia media: **76%**, Precision Fascia alta: **74%**) mantenendo comunque una bassa classificazione di falsi negativi (Recall Fascia bassa: **91**, Recall Fascia media: **81%**, Recall Fascia alta: **78%**), permettendo di ottenere quindi alti valori di misurazione medi di performance.
 
 
-- **Random Forest:**
+## **Random Forest:**
 
 Il modello Random Forest (*ntree*=100) ottenuto presenta risultati molto simili a quelli ottenuti con il modello SVM, in generale otteniamo infatti misure di performance medie di poco maggiori rispetto ad esso (Accuracy media: **78%**, Precision media: **81%**, Recall media: **74%**, F-measure media: **76%**).
 
@@ -483,7 +517,7 @@ La maggiore differenza si ottiene nell'individuazione della Fascia premium, abbi
 
 ---
 
-  **Analisi delle curve ROC e AUC:**
+## **Analisi delle curve ROC e AUC:**
 
 L'analisi delle curve ROC prodotte possono aiutare meglio a comparare l'efficacia di classificazione per ciascun modello mediante rappresentazione grafica.
 
