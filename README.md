@@ -20,6 +20,8 @@ Il dominio di interesse selezionato per il nostro progetto riguarda il prezzo di
 
 ## **Laptop Price**
 
+> link dataset: https://www.kaggle.com/datasets/muhammetvarl/laptop-price
+
 Questo dataset raccoglie informazioni tecniche su diversi modelli e marche di laptop.
 Esso consiste in 1303 elementi caratterizzati dai seguenti attributi:
 
