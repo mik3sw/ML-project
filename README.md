@@ -71,7 +71,7 @@ Esso consiste in 1303 elementi caratterizzati dai seguenti attributi:
 
 ## **Head dataset**
 
-|laptop_ID|Company|Product|TypeName|Inches|ScreenResolution|Cpu|Ram|Memory|Gpu|OpSys|Weight|Price_euros|
+|ID|Company|Product|Type|Inches|ScreenRes|Cpu|Ram|Memory|Gpu|OpSys|Weight|Price|
 |---------|-------|-------|--------|------|----------------|---|---|------|---|-----|------|-----------|
 1|Apple|MacBook Pro|Ultrabook|13.3|IPS Panel Retina Display 2560x1600|Intel Core i5 2.3GHz|8GB|128GB SSD|Intel Iris Plus Graphics 640|macOS|1.37kg|1339.69|
 14|Dell|Inspiron 3567|Notebook|15.6|Full HD 1920x1080|Intel Core i3 6006U 2GHz|4GB|256GB SSD|AMD Radeon R5 M430|Windows 10|2.2kg|498.90
